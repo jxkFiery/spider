@@ -1,0 +1,84 @@
+group 'spider'
+version '1.0'
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'spider'
+    version = '1.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile(
+            'org.springframework.boot:spring-boot-starter-web:1.5.3.RELEASE',
+            'org.springframework.boot:spring-boot-configuration-processor',
+            'org.springframework.boot:spring-boot-starter-data-mongodb',
+            'org.springframework.boot:spring-boot-starter-redis:1.4.6.RELEASE',
+            'com.alibaba:fastjson:1.2.23',
+            //阿里云oss
+            'com.aliyun.oss:aliyun-sdk-oss:2.4.0',
+            //阿里云短信
+            'com.aliyun:aliyun-java-sdk-core:2.4.2',
+            'com.aliyun:aliyun-java-sdk-sms:3.0.0-rc1',
+            //二维码
+            'com.google.zxing:core:3.2.1',
+            //发送邮箱
+            'javax.mail:mail:1.4',
+            //java 解析html 工具
+            'org.jsoup:jsoup:1.7.2',
+            //谷歌搜索依赖
+            'commons-httpclient:commons-httpclient:3.1',
+            'org.apache.commons:commons-lang3:3.1',
+            //xml解析
+            'dom4j:dom4j:1.6.1',
+            'com.thoughtworks.xstream:xstream:1.4.9',
+            //excel
+            'org.apache.poi:poi:3.16',
+            'org.apache.poi:poi-ooxml:3.16',
+            files('lib/taobao-sdk-java.jar')
+    )
+    testCompile(
+            'org.springframework.boot:spring-boot-starter-test'
+    )
+//    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+allprojects {
+    repositories {
+        def REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
+        all { ArtifactRepository repo ->
+            if (repo instanceof MavenArtifactRepository) {
+                def url = repo.url.toString()
+                if (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com/')) {
+                    project.logger.lifecycle "Repository ${repo.url} replaced by $REPOSITORY_URL."
+                    remove repo
+                }
+            }
+        }
+        maven {
+            url REPOSITORY_URL
+        }
+    }
+}

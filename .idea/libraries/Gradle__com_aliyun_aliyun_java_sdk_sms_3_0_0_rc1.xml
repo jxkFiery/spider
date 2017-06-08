@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.aliyun:aliyun-java-sdk-sms:3.0.0-rc1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.aliyun/aliyun-java-sdk-sms/3.0.0-rc1/84641950f996d007a07959ffad3b66f6484ead15/aliyun-java-sdk-sms-3.0.0-rc1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.aliyun/aliyun-java-sdk-sms/3.0.0-rc1/22bd52cc453b984446398f67663bda9e989ee836/aliyun-java-sdk-sms-3.0.0-rc1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,19 @@
+logging:
+  level:
+    root: INFO
+
+server:
+  tomcat.uri-encoding: UTF-8
+  port: 8010
+  connectionTimeout: 30
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/spider
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
